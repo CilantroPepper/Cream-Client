@@ -1,6 +1,7 @@
 import { router, whiteRoutes } from './router'
 import { request, RequestOptions } from './request'
 import { smCrypto } from './smCrypto'
+import { useSystem } from './stores/system'
 
 /**
  * 各种工具
@@ -115,5 +116,13 @@ export const cc = {
     /** 登录时会用的SM加密 */
     sm2Encrypt(value: string) {
         return smCrypto.doSm2Encrypt(value)
+    },
+    /** 尝试安装PWA */
+    installPWA() {
+        const system = useSystem()
+        if (!system.supportPWA || !(<any>system.pwaEvent).prompt) {
+            throw new Error('Not Support PWA')
+        }
+        (<any>system.pwaEvent).prompt()
     }
 }

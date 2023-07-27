@@ -12,9 +12,13 @@ export const useSystem = defineStore('system', () => {
         width: document.documentElement.clientWidth,
         height: document.documentElement.clientHeight
     })
+    // PWA
+    const pwaEvent = ref<Event | null>(null)
     /** getters */
 
     const isWap = computed(() => device.value === 'WAP')
+
+    const supportPWA = Boolean(device.value)
 
     /** actions */
 
@@ -28,14 +32,19 @@ export const useSystem = defineStore('system', () => {
         currentStack.value = detail ?? config.app.TITLE
     }
 
+    // 设置pwa事件
+    function setPwaEvent(e: Event | null) {
+        pwaEvent.value = e
+    }
+
     // 设置屏幕参数
     function setScreen(detail: { width: number, height: number }) {
         screen.value = detail
     }
 
     return {
-        device, screen, currentStack,
-        isWap,
-        setDevice, setCurrentStack, setScreen,
+        device, screen, currentStack, pwaEvent,
+        isWap, supportPWA,
+        setDevice, setCurrentStack, setScreen, setPwaEvent
     }
 })

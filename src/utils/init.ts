@@ -35,4 +35,9 @@ export function init() {
             width, height
         })
     })
+
+    // 初始化PWA
+    window.addEventListener('beforeinstallprompt', e => {
+        system.setPwaEvent(e)
+    })
 }
