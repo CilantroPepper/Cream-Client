@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/scnu-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content=%VITE_DESCRIPTION% />
+    <title>%VITE_INDEX_LOADING_TEXT%</title>
+    <style>
+        /* 优化Vue加载白屏的问题 */
+        .app-loading-root {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            gap: 1rem;
+            background: white;
+        }
+
+        .app-loading-root .text {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-loading-root .wrapper {
+            position: relative;
+            display: flex;
+            width: 5em;
+            height: 5em;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+        }
+
+        @keyframes jump-ani {
+            0% {
+                height: 60%;
+                filter: brightness(150%);
+                opacity: .8;
+            }
+
+            50%,
+            100% {
+                height: 100%;
+                filter: brightness(100%);
+            }
+        }
+
+        .app-loading-root .wrapper .item {
+            flex: 1;
+            height: 100%;
+            background: #2f5597;
+            animation: .75s ease-out calc(var(--offset) * .2s) alternate infinite jump-ani;
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but %VITE_DEFAULT_TITLE% doesn't work properly without JavaScript
+            enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <div class="app-loading-root">
+        <div class="wrapper">
+            <div class="item" style="--offset: 0;"></div>
+            <div class="item" style="--offset: 1;"></div>
+            <div class="item" style="--offset: 2;"></div>
+        </div>
+        <div class="text">%VITE_INDEX_LOADING_TEXT%</div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

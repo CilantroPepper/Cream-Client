@@ -1,0 +1,48 @@
+// 全局变量
+
+// 响应式
+$PC_MIN_WIDTH: 800px;
+$WAP_MAX_WIDTH: 799px;
+
+/**
+ * 以下颜色与 `config.ts` 中配置的 `color` 属性一致
+ * 请直接在 `config.ts` 中配置
+ */
+$WHITE: var(--GLOBAL-WHITE);
+$BLACK: var(--GLOBAL-BLACK);
+$DARK_GREY: var(--GLOBAL-DARK-GREY);
+$LIGHT_GREY: var(--GLOBAL-LIGHT-GREY);
+$SMOKE_WHITE: var(--GLOBAL-SMOKE-WHITE);
+$BLUE: var(--GLOBAL-BLUE);
+$LIGHT_BLUE: var(--GLOBAL-LIGHT-BLUE);
+$LIGHTEST_BLUE: var(--GLOBAL-LIGHTEST-BLUE);
+$DARK_BLUE: var(--GLOBAL-DARK-BLUE);
+$RED: var(--GLOBAL-RED);
+$ORANGE: var(--GLOBAL-ORANGE);
+$GREEN: var(--GLOBAL-GREEN);
+
+*,
+.global {
+    font-size: 1.6rem;
+
+    @media screen and (min-width: $PC_MIN_WIDTH) {
+        font-size: 1.6rem;
+    }
+}
+
+
+.el-button:hover {
+    @media (hover: hover) {
+        color: var(--el-button-hover-text-color);
+        background-color: var(--el-button-hover-bg-color);
+        border-color: var(--el-button-hover-border-color);
+    }
+
+    color: var(--el-button-text-color);
+    background-color: var(--el-button-bg-color);
+    border-color: var(--el-button-border-color);
+}
+
+.el-button:focus {
+    transform: scale3d(0.98, 0.98, 1)
+}
