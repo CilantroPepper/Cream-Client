@@ -1,0 +1,10 @@
+{
+    "name": "Cream-Client",
+    "display": "standalone",
+    "start_url": "/index.html",
+    "icons": [{
+        "src": "/scnu-logo.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }]
+}
