@@ -58,6 +58,7 @@
       </template>
       <div>
         <el-alert title="移动端请不使用抽屉或使用如该页面的方法一样响应式地设置抽屉宽度" show-icon :closable="false" type="warning" />
+        <el-button v-btn @click="cc.previewImage({ url: assets.scnuLogo })">预览图像</el-button>
       </div>
     </el-drawer>
     <el-button @click="handler.installPWA" v-btn>安装PWA</el-button>
