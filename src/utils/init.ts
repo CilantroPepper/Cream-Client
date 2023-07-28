@@ -42,5 +42,5 @@ export function init() {
     }
 
     // 移除加载动画
-    system.setLoading(false)
+    system.setLoading(false, true)
 }
