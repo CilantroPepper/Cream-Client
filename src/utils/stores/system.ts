@@ -3,6 +3,8 @@ import { computed, ref } from 'vue'
 import { config } from '../../config'
 
 export const useSystem = defineStore('system', () => {
+    // 全屏加载节点
+    const globalLoader = <HTMLElement>document.querySelector('.app-loading-root')
     // 全局设备状态: PC或WAP
     const device = ref<'PC' | 'WAP'>('PC')
     // 当前正在访问的Stack页面
@@ -42,9 +44,14 @@ export const useSystem = defineStore('system', () => {
         screen.value = detail
     }
 
+    // 切换全屏加载
+    function setLoading(loading: boolean) {
+        globalLoader.style.setProperty('display', loading ? 'flex' : 'none')
+    }
+
     return {
         device, screen, currentStack, pwaEvent,
         isWap, supportPWA,
-        setDevice, setCurrentStack, setScreen, setPwaEvent
+        setDevice, setCurrentStack, setScreen, setPwaEvent, setLoading
     }
 })

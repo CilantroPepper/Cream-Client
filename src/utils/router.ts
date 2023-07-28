@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { config } from '../config'
 import { useStackInit } from './hooks/pages/useStackInit'
 import { tabs } from '../tab'
+import { useSystem } from './stores/system'
 
 const modules = import.meta.glob('@/views/**/index.vue')
 
@@ -85,6 +86,8 @@ export const router = createRouter({
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
+    // 开启全屏加载
+    useSystem().setLoading(true)
     if (to.meta.label) {
         document.title = to.meta.label as string
     } else {
@@ -95,4 +98,6 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from) => {
     // 清除上一个页面的title
     useStackInit()
+    // 关闭全屏加载
+    useSystem().setLoading(false)
 })
