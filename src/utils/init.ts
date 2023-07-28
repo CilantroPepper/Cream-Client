@@ -24,7 +24,7 @@ export function init() {
     document.body.style.setProperty('--el-color-primary-light-3', config.color.BLUE)
     document.body.style.setProperty('--el-color-primary-light-8', config.color.LIGHT_BLUE)
 
-    window.addEventListener('resize', () => {
+    window.onresize = () => {
         const width = document.documentElement.clientWidth
         const height = document.documentElement.clientHeight
         console.log('Client Screen', { width, height })
@@ -34,12 +34,12 @@ export function init() {
         system.setScreen({
             width, height
         })
-    })
+    }
 
     // 初始化PWA
-    window.addEventListener('beforeinstallprompt', e => {
+    (<any>window).onbeforeinstallprompt = (e: Event) => {
         system.setPwaEvent(e)
-    });
+    }
 
     // 移除加载动画
     system.setLoading(false)
