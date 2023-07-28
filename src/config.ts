@@ -52,9 +52,10 @@ export const config = {
 export const layer = {
     normal: 0,
     drawer: 2003,
+    drawerBackdrop: 2006,
     loading: 2004,
     modal: 2004,
     message: 2004,
     notify: 2006,
-    preview: 2004
+    preview: 2008
 }
