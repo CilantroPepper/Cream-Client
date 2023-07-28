@@ -1,5 +1,8 @@
+import { h, render } from 'vue'
+import ImagePreview, { ImagePreviewProps } from '../components/ImagePreview/ImagePreview.vue'
+import { layer } from '../config'
+import { RequestOptions, request } from './request'
 import { router, whiteRoutes } from './router'
-import { request, RequestOptions } from './request'
 import { smCrypto } from './smCrypto'
 import { useSystem } from './stores/system'
 
@@ -11,7 +14,7 @@ export const cc = {
     // 仅用于切换到某Tab页
     switchTab(path: string, query?: Record<string, any>) {
         router.replace({
-            path: `/t${ path }`,
+            path: `/t${path}`,
             query
         })
     },
@@ -19,7 +22,7 @@ export const cc = {
     navigateTo(path: string, query?: Record<string, any>) {
         let target: string = path
         if (!whiteRoutes.find(item => item.path === path)) {
-            target = `/s${ path }`
+            target = `/s${path}`
         }
         router.push({
             path: target,
@@ -124,5 +127,22 @@ export const cc = {
             throw new Error('Not Support PWA')
         }
         (<any>system.pwaEvent).prompt()
+    },
+    // 预览图像
+    previewImage(props: ImagePreviewProps) {
+        const container = document.createElement('div')
+        container.setAttribute('style', `position: fixed; width: 100vw; height: 100vh; z-index: ${layer.preview}; top: 0; left: 0;`)
+        document.body.appendChild(container)
+        const close = () => {
+            setTimeout(() => {
+                render(null, container)
+                document.body.removeChild(container)
+            }, 250)
+
+        }
+        render(h(ImagePreview, {
+            ...props,
+            onClose: close
+        }), container)
     }
 }

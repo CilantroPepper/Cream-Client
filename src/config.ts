@@ -48,9 +48,13 @@ export const config = {
     }
 }
 
-export interface Palette {
-    main: string
-    text: string
-    secondary?: string
+// zIndex配置
+export const layer = {
+    normal: 0,
+    drawer: 2003,
+    loading: 2004,
+    modal: 2004,
+    message: 2004,
+    notify: 2006,
+    preview: 2004
 }
-export interface Theme extends Record<string, Palette> {}
