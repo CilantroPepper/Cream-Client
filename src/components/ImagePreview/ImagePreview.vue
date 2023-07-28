@@ -3,7 +3,9 @@
         leave-active-class="animate__animated animate__fadeOut">
         <div v-if="open" :class="$style.root" @click="handler.onClickBackdrop" @scroll="handler.onScroll"
             :style="`--backdrop: ${backdropColor ?? '#0008'};`">
-            <img :class="$style.image" @click="handler.onClickImage" :src="url" :style="`--width: ${size.width}; --height: ${size.height}`" />
+            <img :class="$style.image" @click="handler.onClickImage" :src="url"
+                :style="`--width: ${size.width}; --height: ${size.height}`" />
+            <div :class="$style.close" @click="handler.onClickClose">&times;</div>
         </div>
     </Transition>
 </template>
@@ -47,6 +49,11 @@ const handler = {
     },
     onScroll(e: Event) {
         e.stopPropagation()
+    },
+    onClickClose(e: Event) {
+        e.preventDefault()
+        e.stopPropagation()
+        handler.onClickBackdrop()
     }
 }
 setTimeout(() => {
@@ -63,6 +70,25 @@ setTimeout(() => {
     justify-content: center;
     align-items: center;
     background: var(--backdrop);
+
+    .close {
+        position: absolute;
+        bottom: 10%;
+        color: $SMOKE_WHITE;
+        width: 4.5rem;
+        height: 4.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0005;
+        border-radius: 50%;
+        font-size: 2rem;
+        z-index: 2;
+
+        @media (hover: hover) {
+            cursor: pointer;
+        }
+    }
 
     .image {
         width: var(--width);
