@@ -1,10 +1,12 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { config } from '../../config'
+import { cc } from '../tools'
 
 export const useSystem = defineStore('system', () => {
     // 全屏加载节点
     const globalLoader = <HTMLElement>document.querySelector('.app-loading-root')
+    const layoutLoader = ref<{ close(): any } | null>(null)
     // 全局设备状态: PC或WAP
     const device = ref<'PC' | 'WAP'>('PC')
     // 当前正在访问的Stack页面
@@ -44,9 +46,23 @@ export const useSystem = defineStore('system', () => {
         screen.value = detail
     }
 
-    // 切换全屏加载
-    function setLoading(loading: boolean) {
-        globalLoader.style.setProperty('display', loading ? 'flex' : 'none')
+    /**
+     * 切换加载状态
+     * @param loading 是否加载
+     * @param fullScreen 是否全屏
+     */
+    function setLoading(loading: boolean, fullScreen = false) {
+        if (fullScreen) {
+            globalLoader.style.setProperty('display', loading ? 'flex' : 'none')
+            return
+        }
+        if (loading) {
+            layoutLoader.value = cc.loading('努力加载中...', '#fffa')
+        } else {
+            layoutLoader.value?.close?.()
+            layoutLoader.value = null
+        }
+
     }
 
     return {

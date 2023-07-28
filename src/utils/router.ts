@@ -87,7 +87,7 @@ export const router = createRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
     // 开启全屏加载
-    useSystem().setLoading(true)
+    useSystem().setLoading(true, false)
     if (to.meta.label) {
         document.title = to.meta.label as string
     } else {
@@ -99,5 +99,5 @@ router.afterEach((to, from) => {
     // 清除上一个页面的title
     useStackInit()
     // 关闭全屏加载
-    useSystem().setLoading(false)
+    useSystem().setLoading(false, false)
 })
