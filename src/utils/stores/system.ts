@@ -57,7 +57,7 @@ export const useSystem = defineStore('system', () => {
             return
         }
         if (loading) {
-            layoutLoader.value = cc.loading('努力加载中...')
+            layoutLoader.value = cc.loading('努力加载中...', '#fffa')
         } else {
             layoutLoader.value?.close?.()
             layoutLoader.value = null
