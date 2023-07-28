@@ -15,9 +15,7 @@ const app = createApp(App)
 
 app.config.errorHandler = errorHandler
 
-init()
-
 app.mount('#app')
 
-document.querySelector('.app-loading-root')?.remove()
+init()
 

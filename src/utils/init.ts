@@ -39,5 +39,8 @@ export function init() {
     // 初始化PWA
     window.addEventListener('beforeinstallprompt', e => {
         system.setPwaEvent(e)
-    })
+    });
+
+    // 移除加载动画
+    system.setLoading(false)
 }
