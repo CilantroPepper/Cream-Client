@@ -132,7 +132,10 @@ export const cc = {
     },
     // RSA 加密
     rsaEncrypt(data: string, publicKey?: string) {
-        const key = publicKey ?? `ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQEbeHqVkmwtTKQnDR7yfeSr3EdsO5N5Lx2TZUwV1jQyZnl0FiTw7j9tZBZmBDu6gyFmJx/LwrHfhzP3r/RkQVecTfFnxpYdDZo53bnRZ7DstMPGuBFg5kuPvPUy3BkbaZ8I+3gsrd6iv6w0IOtwoIh4dV6L8VWd46UgwW0ze3BHov6VrkosB0k//eN69hp0v9ezOdMEoVBFnuSuE8O2PAOKnzL3lzcRKJI+gwiOVKmD78KQY4u2yOu8kyI37XGd6FRccE4VOfmI6pooBSqjLjrF519xy18cNdYX4I9PAFOEIgRcYWv2Z8+2A1V1dfeMQ6J1bykM1hu9eXXShOS6n2siEysw4wK8cHCQNc2mZNf6sco5IH97xPnacfTOO8AjL1aBGBDKkXrRJJcUII+J+ymB3wqz5lM4ENjZr1POytISL7ko3A8HYGtfGpySmPU1z+E7yWDg62W7zebuDEznIg3mC0OzT/C2GC5DwaJyoJddSFSzE5I5y9Ta92sIt0Y8s= cc@CilantroPepper`
+        const key = publicKey ?? `-----BEGIN PUBLIC KEY-----
+        MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLNzp815xggKCk+nWl77qbPDbJpQO5B
+        mG6pz8e9H0DIgpvoqpWqMpG1brH33CqM+yKqLay1ToBLr7QIumlbATkCAwEAAQ==
+        -----END PUBLIC KEY-----`
         const encrypter = new JSEncrypt()
         encrypter.setPublicKey(key)
         const result = encrypter.encrypt(data)
