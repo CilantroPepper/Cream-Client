@@ -5,6 +5,8 @@ import { RequestOptions, request } from './request'
 import { router, whiteRoutes } from './router'
 import { smCrypto } from './smCrypto'
 import { useSystem } from './stores/system'
+import CryptoJS from 'crypto-js'
+import JSEncrypt from 'jsencrypt'
 
 /**
  * 各种工具
@@ -116,9 +118,26 @@ export const cc = {
         link.click()
         URL.revokeObjectURL(url)
     },
-    /** 登录时会用的SM加密 */
+    // SM加密
     sm2Encrypt(value: string) {
         return smCrypto.doSm2Encrypt(value)
+    },
+    // AES 加密
+    aesEncrypt(data: string) {
+        const secret = this.getRandomKey(16)
+        return {
+            secret,
+            result: CryptoJS.AES.encrypt(data, secret).toString()
+        }
+    },
+    // RSA 加密
+    rsaEncrypt(data: string, publicKey?: string) {
+        const key = publicKey ?? `ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQEbeHqVkmwtTKQnDR7yfeSr3EdsO5N5Lx2TZUwV1jQyZnl0FiTw7j9tZBZmBDu6gyFmJx/LwrHfhzP3r/RkQVecTfFnxpYdDZo53bnRZ7DstMPGuBFg5kuPvPUy3BkbaZ8I+3gsrd6iv6w0IOtwoIh4dV6L8VWd46UgwW0ze3BHov6VrkosB0k//eN69hp0v9ezOdMEoVBFnuSuE8O2PAOKnzL3lzcRKJI+gwiOVKmD78KQY4u2yOu8kyI37XGd6FRccE4VOfmI6pooBSqjLjrF519xy18cNdYX4I9PAFOEIgRcYWv2Z8+2A1V1dfeMQ6J1bykM1hu9eXXShOS6n2siEysw4wK8cHCQNc2mZNf6sco5IH97xPnacfTOO8AjL1aBGBDKkXrRJJcUII+J+ymB3wqz5lM4ENjZr1POytISL7ko3A8HYGtfGpySmPU1z+E7yWDg62W7zebuDEznIg3mC0OzT/C2GC5DwaJyoJddSFSzE5I5y9Ta92sIt0Y8s= cc@CilantroPepper`
+        const encrypter = new JSEncrypt()
+        encrypter.setPublicKey(key)
+        const result = encrypter.encrypt(data)
+        if (!result) throw new Error('RSA Encrypt Fail!')
+        return result
     },
     /** 尝试安装PWA */
     installPWA() {
@@ -144,5 +163,13 @@ export const cc = {
             ...props,
             onClose: close
         }), container)
+    },
+    // 随机生成字符串
+    getRandomKey(size: number, source?: string) {
+        const dict = source ?? 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789'
+        let uuid = ''
+        for (let i = 0; i < length; ++i)
+            uuid += dict[Math.floor(Math.random() * dict.length)]
+        return uuid
     }
 }
