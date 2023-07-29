@@ -77,6 +77,7 @@ export async function request<T>(options: RequestOptions): Promise<T> {
         throw e
     }
     if (!response.ok) {
+        cc.notify('请求出错或服务器过载', 'error')
         throw response
     }
     // 配置了返回是文件，直接返回原始 response
