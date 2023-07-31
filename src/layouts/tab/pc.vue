@@ -2,7 +2,7 @@
   <div class="pc-root">
     <div class="menu" :style="`--width: ${config.app.MENU_WIDTH}rem;`">
       <div class="header">
-        <img :src="assets.scnuLogo" alt="校徽" class="logo">
+        <img :src="assets.scnuLogo" class="logo" alt="logo">
         <div class="title">{{ config.app.TITLE }}</div>
       </div>
       <div class="menu-item">
