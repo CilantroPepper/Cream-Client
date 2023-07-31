@@ -46,3 +46,11 @@ $GREEN: var(--GLOBAL-GREEN);
 .el-button:focus {
     transform: scale3d(0.98, 0.98, 1)
 }
+
+.flex-row {
+    display: flex;
+}
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}

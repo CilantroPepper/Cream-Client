@@ -75,7 +75,7 @@ export const cc = {
     /**
      * 选择本地文件
      * @param accept 接受的文件后缀
-     * @param multiply 是否接受多选
+     * @param multiple 是否接受多选
      * @description 请在then中获取选择的文件列表并进行业务操作，catch块不应作为没有选择的依据
      */
     chooseFile: (accept?: string[], multiple = false) => new Promise<FileList>((resolve, reject) => {

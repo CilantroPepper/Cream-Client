@@ -6,6 +6,7 @@ import { cc } from '../tools'
 export const useSystem = defineStore('system', () => {
     // 全屏加载节点
     const globalLoader = <HTMLElement>document.querySelector('.app-loading-root')
+    // 不遮盖layout的加载节点
     const layoutLoader = ref<{ close(): any } | null>(null)
     // 全局设备状态: PC或WAP
     const device = ref<'PC' | 'WAP'>('PC')
@@ -16,12 +17,13 @@ export const useSystem = defineStore('system', () => {
         width: document.documentElement.clientWidth,
         height: document.documentElement.clientHeight
     })
-    // PWA
+    // PWA安装事件
     const pwaEvent = ref<Event | null>(null)
     /** getters */
 
+    // 是否是移动设备
     const isWap = computed(() => device.value === 'WAP')
-
+    // 是否支持PWA
     const supportPWA = Boolean(device.value)
 
     /** actions */
@@ -57,7 +59,7 @@ export const useSystem = defineStore('system', () => {
             return
         }
         if (loading) {
-            layoutLoader.value = cc.loading('努力加载中...', '#fffa')
+            layoutLoader.value = cc.loading('努力加载中...', '#fffc')
         } else {
             layoutLoader.value?.close?.()
             layoutLoader.value = null

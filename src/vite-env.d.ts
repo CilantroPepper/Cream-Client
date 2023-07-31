@@ -6,6 +6,7 @@ interface ImportMetaEnv {
     readonly VITE_INDEX_LOADING_TEXT: string // 主页加载时显示文本
     readonly VITE_DEFAULT_TITLE: string // 默认标题
     readonly VITE_APP_DESCRIPTION: string // APP描述
+    readonly VITE_APP_AUTHOR: string // 作者
 }
 
 interface ImportMeta {

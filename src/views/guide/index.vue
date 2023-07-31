@@ -49,7 +49,7 @@
     <template></template>
     <el-button type="primary" plain @click="handler.toNotFound" v-btn>跳转到另一个页面</el-button>
     <template />
-    <el-button @click="handler.chooseFile" v-btn>选择文件并上传</el-button>
+    <el-button @click="handler.chooseFile" v-btn>选择图像上传</el-button>
     <template />
     <el-button @click="handler.showDrawer" v-btn>打开抽屉</el-button>
     <el-drawer v-model="showDrawer" :size="drawerSize" direction="ltr">
@@ -114,7 +114,7 @@ const handler = {
     cc.navigateTo('/this-is-a-useless-page')
   },
   chooseFile() {
-    cc.chooseFile(['.png', '.jpg', '.pdf'], false)
+    cc.chooseFile(['.png', '.jpg'], false)
       .then(async files => {
         console.log(files)
         cc.notify(`已选择${files.length}个文件，请打开控制台查看详情`, 'success')
