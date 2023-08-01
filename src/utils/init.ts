@@ -1,10 +1,11 @@
 import { config } from '../config'
 import { useSystem } from './stores/system'
+import { App } from 'vue'
+import button from './directive/button.ts'
+import ripple from './directive/ripple.ts'
+import EnhancedButton from '../components/Button/EnhancedButton.tsx'
 
-/**
- * 应用初始化
- */
-export function init() {
+export function initialize() {
     const system = useSystem()
     const width = document.documentElement.clientWidth
     const colors = config.color
@@ -12,7 +13,7 @@ export function init() {
     system.setDevice(width >= config.app.STANDARD_WIDTH ? 'PC' : 'WAP')
     // 初始化颜色
     Object.entries(colors).forEach(item => {
-        document.body.style.setProperty(`--GLOBAL-${item[0].replace('_', '-')}`, item[1])
+        document.body.style.setProperty(`--GLOBAL-${ item[0].replace('_', '-') }`, item[1])
     })
     // 设置响应式基准
     document.body.style.setProperty('--PC-MIN-WIDTH', config.app.STANDARD_WIDTH + 'px')
@@ -43,4 +44,16 @@ export function init() {
 
     // 移除加载动画
     system.setLoading(false, true)
+}
+
+/**
+ * 应用初始化
+ */
+export default {
+    install(app: App) {
+        app.use(button) // 安装自定义指令 v-btn，解决element-plus按钮点击不失焦的BUG
+            .use(ripple) // 自定义指令 v-ripple，点击水波纹效果
+            .component('cc-button', EnhancedButton) // 增强型按钮
+        initialize()
+    }
 }

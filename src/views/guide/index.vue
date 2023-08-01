@@ -9,13 +9,11 @@
     </div>
 
     <el-button type="primary" style="font-size: 1.6rem;" v-btn>主题按钮</el-button>
-    <div>
-      <el-alert type="warning" show-icon :closable="false">
-        <template #title>
-          <div class="global">连续两个el按钮使用时，若希望消除margin，则必须在中间插入一个无意义的template</div>
-        </template>
-      </el-alert>
-    </div>
+    <el-alert type="warning" show-icon :closable="false">
+      <template #title>
+        <div class="global">连续两个el按钮使用时，若希望消除margin，则必须在中间插入一个无意义的template</div>
+      </template>
+    </el-alert>
     <el-button type="primary" plain v-btn>主题按钮描边风格</el-button>
     <template></template>
     <el-button type="danger" plain v-btn>标识危险的按钮</el-button>
@@ -31,11 +29,11 @@
       </el-alert>
     </div>
 
-    <el-button @click="handler.showDialog">弹出对话框</el-button>
+    <cc-button @click="handler.showDialog">弹出对话框</cc-button>
     <template></template>
-    <el-button @click="handler.message" v-btn>弹出消息框</el-button>
+    <cc-button @click="handler.message">弹出消息框</cc-button>
     <template></template>
-    <el-button @click="handler.notify" v-btn>弹出通知框</el-button>
+    <cc-button @click="handler.notify" v-btn>弹出通知框</cc-button>
     <div class="alert">
       <el-alert type="error" show-icon :closable="false">
         <template #title>
@@ -48,21 +46,22 @@
     <el-button @click="handler.loading" v-btn>打开加载, 1s后关闭</el-button>
     <template></template>
     <el-button type="primary" plain @click="handler.toNotFound" v-btn>跳转到另一个页面</el-button>
-    <template />
+    <template/>
     <el-button @click="handler.chooseFile" v-btn>选择图像上传</el-button>
-    <template />
+    <template/>
     <el-button @click="handler.showDrawer" v-btn>打开抽屉</el-button>
     <el-drawer v-model="showDrawer" :size="drawerSize" direction="ltr">
       <template #header>
         <div>一个抽屉</div>
       </template>
       <div>
-        <el-alert title="移动端请不使用抽屉或使用如该页面的方法一样响应式地设置抽屉宽度" show-icon :closable="false" type="warning" />
+        <el-alert title="移动端请不使用抽屉或使用如该页面的方法一样响应式地设置抽屉宽度" show-icon :closable="false"
+                  type="warning"/>
         <el-button v-btn @click="cc.previewImage({ url: assets.scnuLogo })">预览图像</el-button>
       </div>
     </el-drawer>
     <el-button @click="handler.installPWA" v-btn>安装PWA</el-button>
-    <template />
+    <template/>
   </div>
 </template>
 
@@ -97,8 +96,8 @@ const drawerSize = computed(() => system.isWap ? '100%' : '30%')
 const handler = {
   showDialog() {
     cc.modal('一个弹框')
-      .then(() => cc.message('点击了确认', 'success'))
-      .catch(() => cc.message('点击了取消', 'warning'))
+        .then(() => cc.message('点击了确认', 'success'))
+        .catch(() => cc.message('点击了取消', 'warning'))
   },
   message() {
     cc.message('消息框', 'success')
@@ -115,23 +114,23 @@ const handler = {
   },
   chooseFile() {
     cc.chooseFile(['.png', '.jpg'], false)
-      .then(async files => {
-        console.log(files)
-        cc.notify(`已选择${files.length}个文件，请打开控制台查看详情`, 'success')
-        const [id, setId] = useApi<UploadResult, UploadParams>(fileApi.upload)
-        await setId({
-          file: files[0]
+        .then(async files => {
+          console.log(files)
+          cc.notify(`已选择${ files.length }个文件，请打开控制台查看详情`, 'success')
+          const [id, setId] = useApi<UploadResult, UploadParams>(fileApi.upload)
+          await setId({
+            file: files[0]
+          })
+          cc.message('上传成功', 'success')
+          console.log('文件ID', id.value)
         })
-        cc.message('上传成功', 'success')
-        console.log('文件ID', id.value)
-      })
-      .catch(e => console.log(e))
+        .catch(e => console.log(e))
   },
   showDrawer() {
     showDrawer.value = true
   },
   onClickCarousel(index: number) {
-    cc.message(`点击了${carousel[index].info}`, 'info')
+    cc.message(`点击了${ carousel[index].info }`, 'info')
   },
   installPWA() {
     try {
@@ -146,6 +145,7 @@ const handler = {
 <style lang="scss" scoped>
 .root {
   display: flex;
+  flex: 1 0;
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;

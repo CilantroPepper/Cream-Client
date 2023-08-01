@@ -31,16 +31,22 @@ $GREEN: var(--GLOBAL-GREEN);
 }
 
 
-.el-button:hover {
-    @media (hover: hover) {
-        color: var(--el-button-hover-text-color);
-        background-color: var(--el-button-hover-bg-color);
-        border-color: var(--el-button-hover-border-color);
+.el-button {
+    @media screen and (max-width: $WAP_MAX_WIDTH) {
+        cursor: default;
     }
 
-    color: var(--el-button-text-color);
-    background-color: var(--el-button-bg-color);
-    border-color: var(--el-button-border-color);
+    &:hover {
+        @media screen and (min-width: $PC_MIN_WIDTH) {
+            color: var(--el-button-hover-text-color);
+            background-color: var(--el-button-hover-bg-color);
+            border-color: var(--el-button-hover-border-color);
+        }
+
+        color: var(--el-button-text-color);
+        background-color: var(--el-button-bg-color);
+        border-color: var(--el-button-border-color);
+    }
 }
 
 .el-button:focus {

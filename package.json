@@ -25,6 +25,7 @@
     "@types/node": "^20.4.2",
     "@types/sm-crypto": "^0.3.0",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "typescript": "^5.0.2",
