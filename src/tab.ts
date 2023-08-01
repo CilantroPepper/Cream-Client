@@ -18,12 +18,12 @@ export interface TabConfig {
  * */
 export const tabs: TabConfig[] = [{
     path: '/record',
-    label: 'Record',
+    label: '记录',
     icon: CirclePlusFilled as any,
     component: '/src/views/tab/record/index.vue'
 }, {
     path: '/user',
-    label: 'UserCenter',
+    label: '个人中心',
     icon: UserFilled as any,
     component: '/src/views/tab/user/index.vue'
 }]

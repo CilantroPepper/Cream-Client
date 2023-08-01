@@ -10,7 +10,8 @@
             v-for="(item, index) in tabs" :key="index"
             :style="`--color: ${getColor(item.label)}; --background: ${current === item.label ? 'var(--GLOBAL-LIGHTEST-BLUE)' : 'transparent'}`"
             class="item"
-            @click="handler.onTabClick(item.path)">
+            @click="handler.onTabClick(item.path)"
+            v-ripple>
           <component :is="item.icon" :color="getColor(item.label)" class="widget"/>
           <span class="label">{{ item.label }}</span>
         </div>
