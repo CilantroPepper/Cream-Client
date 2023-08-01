@@ -29,11 +29,11 @@
       </el-alert>
     </div>
 
-    <el-button @click="handler.showDialog">弹出对话框</el-button>
+    <cc-button @click="handler.showDialog">弹出对话框</cc-button>
     <template></template>
-    <el-button @click="handler.message" v-btn>弹出消息框</el-button>
+    <cc-button @click="handler.message">弹出消息框</cc-button>
     <template></template>
-    <el-button @click="handler.notify" v-btn>弹出通知框</el-button>
+    <cc-button @click="handler.notify" v-btn>弹出通知框</cc-button>
     <div class="alert">
       <el-alert type="error" show-icon :closable="false">
         <template #title>

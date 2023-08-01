@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col root">
     这是受到Tab路由控制的Record页面
-    <el-button type="primary" plain v-btn v-ripple @click="handler.toGuide">前往Guide</el-button>
+    <cc-button type="primary" plain @click="handler.toGuide">前往Guide</cc-button>
   </div>
 </template>
 
