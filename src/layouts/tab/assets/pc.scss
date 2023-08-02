@@ -13,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    padding: 2rem 0;
     box-shadow: 0 0 1rem $SMOKE_WHITE;
     gap: 1rem;
 
@@ -21,20 +22,28 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      width: 100%;
-      padding: 2.5rem 0;
+      width: calc(100% - 4rem);
+      padding: 1.5rem 0;
       gap: .5rem;
       transition: all .25s;
       cursor: pointer;
-      border-bottom: .2rem $SMOKE_WHITE solid;
+      //border-bottom: .2rem $SMOKE_WHITE solid;
+      box-shadow: .3rem .3rem .5rem $LIGHT_GREY, -.3rem -.3rem .5rem $SMOKE_WHITE;
+      border-radius: 1rem;
+      transition: all .5s;
 
       &:hover {
         color: $DARK_BLUE;
+
 
         .logo {
           transform: scale3d(1.05, 1.05, 1.05);
           filter: drop-shadow(0 0 .25rem #{$DARK_GREY});
         }
+      }
+
+      &:active {
+        box-shadow: inset .3rem .3rem .5rem $LIGHT_GREY, inset -.3rem -.3rem .5rem $SMOKE_WHITE;
       }
 
       .logo {
