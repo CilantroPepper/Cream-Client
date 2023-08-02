@@ -29,11 +29,11 @@
       </el-alert>
     </div>
 
-    <cc-button @click="handler.showDialog">弹出对话框</cc-button>
+    <plus-button @click="handler.showDialog">弹出对话框</plus-button>
     <template></template>
-    <cc-button @click="handler.message">弹出消息框</cc-button>
+    <plus-button @click="handler.message">弹出消息框</plus-button>
     <template></template>
-    <cc-button @click="handler.notify" v-btn>弹出通知框</cc-button>
+    <plus-button @click="handler.notify" v-btn>弹出通知框</plus-button>
     <div class="alert">
       <el-alert type="error" show-icon :closable="false">
         <template #title>
@@ -74,6 +74,7 @@ import { assets } from '../../utils/assets'
 import { useApi } from '../../utils/hooks/apis/useApi'
 import { fileApi } from '../../apis/dev/fileApi'
 import { UploadParams, UploadResult } from '../../utils/hooks/apis/dev/file.type'
+import { Plus } from '@element-plus/icons-vue'
 
 // 如果希望自定义Stack页面的header，则你应该在该页面中使用这个hook，并传入title
 useStackInit('Components Guide')

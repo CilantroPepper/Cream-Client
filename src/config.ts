@@ -19,7 +19,7 @@ export const config = {
         // WAP端是否开启抽屉菜单（若为true，则TabBar表现为抽屉菜单，Tab页有标题栏）
         WAP_MENU: true,
         // PC端Menu宽度(单位: rem)
-        MENU_WIDTH: 20,
+        MENU_WIDTH: 24,
         // 描述
         DESCRIPTION: import.meta.env.VITE_APP_DESCRIPTION,
         // 作者

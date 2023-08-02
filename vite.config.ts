@@ -26,7 +26,7 @@ export default ({ mode }) => defineConfig({
     base: loadEnv(mode, process.cwd()).VITE_BASE,
     resolve: {
         alias: {
-            '@/': `${resolve(__dirname, 'src')}/`,
+            '@/': `${resolve(__dirname, './src')}/`,
             '~/': `${resolve(__dirname, './')}`
         }
     },

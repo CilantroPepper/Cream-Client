@@ -4,6 +4,7 @@ import { App } from 'vue'
 import button from './directive/button.ts'
 import ripple from './directive/ripple.ts'
 import EnhancedButton from '../components/Button/EnhancedButton.tsx'
+import CcButton from '@/components/Button/CcButton.vue'
 
 export function initialize() {
     const system = useSystem()
@@ -53,7 +54,8 @@ export default {
     install(app: App) {
         app.use(button) // 安装自定义指令 v-btn，解决element-plus按钮点击不失焦的BUG
             .use(ripple) // 自定义指令 v-ripple，点击水波纹效果
-            .component('cc-button', EnhancedButton) // 增强型按钮
+            .component('plus-button', EnhancedButton) // 增强型按钮
+            .component('cc-button', CcButton) // CC Button
         initialize()
     }
 }

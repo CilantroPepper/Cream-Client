@@ -9,43 +9,66 @@
     width: var(--width);
     flex-shrink: 0;
     height: 100%;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    box-shadow: 0 0 1rem $SMOKE_WHITE;
-    gap: 1rem;
+    padding: 2rem 0;
+    gap: 2.5rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: .2rem;
+      height: calc(100% - 4rem);
+      background: $SMOKE_WHITE;
+      border-radius: 1rem;
+    }
 
     .header {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      width: 100%;
-      padding: 2.5rem 0;
-      gap: .5rem;
-      transition: all .25s;
+      width: calc(100% - 4rem);
+      padding: 1rem 0;
+      gap: 1rem;
       cursor: pointer;
-      border-bottom: .2rem $SMOKE_WHITE solid;
+      border-radius: 1rem;
+      transition: all .5s;
+      user-select: none;
+      background: linear-gradient(30deg, $LIGHTEST_BLUE, $WHITE);
+      color: $DARK_GREY;
 
       &:hover {
         color: $DARK_BLUE;
-
-        .logo {
-          transform: scale3d(1.05, 1.05, 1.05);
-          filter: drop-shadow(0 0 .25rem #{$DARK_GREY});
-        }
       }
 
       .logo {
         width: 2.8rem;
         height: 2.8rem;
         transition: all .25s;
+        box-sizing: border-box;
+        padding: .2rem;
+        background: linear-gradient(60deg, $LIGHT_BLUE, $LIGHTEST_BLUE);
+        border-radius: 50%;
       }
 
       .title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        //font-weight: bold;
       }
+    }
+
+    .search-box {
+      width: 100%;
+      margin-bottom: 2rem;
     }
 
     .menu-item {
@@ -54,24 +77,26 @@
       flex-direction: column;
       align-items: center;
       box-sizing: border-box;
-      padding: 2rem;
-      gap: 1rem;
+      padding: 0 2rem;
+      gap: 2rem;
 
       .item {
+        flex: 1 0;
         display: flex;
         gap: 1rem;
         box-sizing: border-box;
         align-items: center;
         justify-content: flex-start;
-        padding: 1.5rem;
+        padding: 1.25rem;
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         cursor: pointer;
         transition: all .25s;
         color: var(--color);
-        background: var(--background);
-        border-radius: 1.5rem;
+        //background: var(--background);
+        box-shadow: var(--mimetic);
+        border-radius: 1rem;
 
         &:hover {
           background: $SMOKE_WHITE;

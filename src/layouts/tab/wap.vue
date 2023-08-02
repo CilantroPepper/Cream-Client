@@ -4,17 +4,22 @@
       <div class="flex-row wap-title-bar" :style="`--height: ${config.app.TABBAR_HEIGHT}rem;`">
         <!--          开启抽屉菜单-->
         <div class="title">{{ current }}</div>
-        <more class="menu-icon" :class="{active: menuIconActivated}" @click="handler.onMenuIconClick"/>
+        <div v-ripple class="menu-icon" @click="handler.onMenuIconClick">
+          <more/>
+        </div>
         <el-drawer
             v-model="drawer"
-            direction="ltr" :with-header="false" size="75%"
+            direction="ltr" :with-header="false" size="80%"
             modal-class="wap-menu-modal">
           <div class="menu-item">
+            <div class="flex-row search-box">
+              <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search"/>
+            </div>
             <div
-                v-for="(item, index) in tabs" :key="index"
-                :style="`--color: ${getColor(item.label)}; --background: ${current === item.label ? 'var(--GLOBAL-LIGHTEST-BLUE)' : 'transparent'}`"
+                v-for="(item, index) in tabList" :key="index"
+                :style="`--color: ${getColor(item.label)}; --mimetic: ${mimetic(item.label)};`"
                 class="item"
-                @click="handler.onTabClick(item.path)">
+                @click="handler.onTabClick(item)">
               <component :is="item.icon" :color="getColor(item.label)" class="widget"/>
               <span class="label">{{ item.label }}</span>
             </div>
@@ -51,27 +56,37 @@ import { useRoute } from 'vue-router'
 import { config } from '../../config'
 import { tabs } from '../../tab'
 import { cc } from '../../utils/tools'
-import { More } from '@element-plus/icons-vue'
+import { More, Search } from '@element-plus/icons-vue'
 
 const route = useRoute()
 
 const current = computed(() => route.meta.label as string)
 const getColor = (label: string) => current.value === label ? config.color.DARK_BLUE : config.color.DARK_GREY
+const mimetic = (label: string) =>
+    current.value === label ? `inset .2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), inset -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
+        : `.2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
 
-// 是否激活icon
-const menuIconActivated = ref(false)
 // 显示drawer
 const drawer = ref(false)
+// 筛选框
+const filter = ref('')
+
+const tabList = computed(() => {
+  if (!Boolean(filter.value)) {
+    return tabs
+  }
+  return tabs.filter(item => item.label.includes(filter.value) || item.path.includes(filter.value))
+})
 
 const handler = {
-  onTabClick(path: string) {
-    cc.switchTab(path)
-    drawer.value = false
+  onTabClick(item: any) {
+    if (item.label !== current.value) {
+      cc.switchTab(item.path)
+      drawer.value = false
+    }
   },
   onMenuIconClick() {
-    menuIconActivated.value = true
     drawer.value = !drawer.value
-    setTimeout(() => (menuIconActivated.value = false), 250)
   }
 }
 

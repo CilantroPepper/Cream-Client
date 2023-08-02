@@ -24,6 +24,7 @@ $GREEN: var(--GLOBAL-GREEN);
 *,
 .global {
     font-size: 1.6rem;
+    line-height: 1.2;
 
     @media screen and (min-width: $PC_MIN_WIDTH) {
         font-size: 1.6rem;
