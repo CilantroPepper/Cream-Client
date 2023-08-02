@@ -2,21 +2,27 @@
   position: relative;
   overflow: hidden;
 
+  @keyframes ripple {
+    to {
+      opacity: 0;
+      border-radius: 0;
+      transform: translate3d(-50%, -50%, 0) scale(4);
+    }
+  }
   &::after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 0;
-    background: #fff5;
+    left: var(--left);
+    top: var(--top);
+    width: 100%;
+    height: 100%;
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 0;
     border-radius: 50%;
     transition: all .25s;
-    z-index: 0;
   }
   &.active::after {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    border-radius: 0;
+    animation: ripple linear 1 0.25s;
   }
 }
