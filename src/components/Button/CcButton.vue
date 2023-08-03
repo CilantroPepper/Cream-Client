@@ -16,6 +16,7 @@ export interface CcButtonProps {
   size?: 'small' | 'medium' | 'large',
   variant?: 'outlined' | 'contained' | 'text',
   color?: string
+  factor?: number
   mimetic?: boolean // 是否拟态
 }
 
@@ -33,7 +34,7 @@ const backgroundColor = computed(() => {
   if (props.variant === 'contained') {
     return props.color ?? config.color.DARK_BLUE
   }
-  return cc.colorUtils.lighten(props.color ?? config.color.DARK_BLUE, 0.56)
+  return cc.colorUtils.lighten(props.color ?? config.color.DARK_BLUE, props.factor ?? 0.56)
 })
 const borderColor = computed(() => {
   if (props.variant === 'text') {
@@ -65,6 +66,8 @@ const shadow = computed(() => {
 
 const handler = {
   onClick(e: MouseEvent) {
+    e.stopPropagation()
+    e.preventDefault()
     emits('click', e)
   }
 }

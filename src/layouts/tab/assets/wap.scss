@@ -92,6 +92,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    gap: 1rem;
   }
 
   .menu-item {
@@ -149,7 +150,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: fit-content;
+    width: 100%;
     padding: .75rem;
     gap: 1rem;
     border-radius: .5rem;
