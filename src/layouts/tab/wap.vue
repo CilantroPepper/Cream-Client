@@ -9,20 +9,28 @@
         </div>
         <el-drawer
             v-model="drawer"
-            direction="ltr" :with-header="false" size="80%"
+            direction="ltr" :with-header="false" size="75%"
             modal-class="wap-menu-modal">
+          <div class="menu">
           <div class="menu-item">
             <div class="flex-row search-box">
               <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search"/>
             </div>
             <div
-                v-for="(item, index) in tabList" :key="index"
-                :style="`--color: ${getColor(item.label)}; --mimetic: ${mimetic(item.label)};`"
+                v-for="(item) in tabList" :key="item.path"
+                v-ripple
+                :style="`--color: ${getColor(item.label)}; --background: ${getBackground(item.label)};`"
                 class="item"
                 @click="handler.onTabClick(item)">
               <component :is="item.icon" :color="getColor(item.label)" class="widget"/>
               <span class="label">{{ item.label }}</span>
             </div>
+
+          </div>
+          <div class="header" v-ripple>
+            <img :src="assets.scnuLogo" class="logo" alt="logo">
+            <div class="title">{{ config.app.ABBR }} {{ config.app.VERSION }}</div>
+          </div>
           </div>
         </el-drawer>
       </div>
@@ -51,21 +59,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { config } from '../../config'
-import { tabs } from '../../tab'
-import { cc } from '../../utils/tools'
-import { More, Search } from '@element-plus/icons-vue'
+import {computed, ref} from 'vue'
+import {useRoute} from 'vue-router'
+import {config} from '../../config'
+import {tabs} from '../../tab'
+import {cc} from '../../utils/tools'
+import {More, Search} from '@element-plus/icons-vue'
+import {assets} from "@/utils/assets.ts";
+
+const primary = config.color.DARK_BLUE
 
 const route = useRoute()
 
 const current = computed(() => route.meta.label as string)
-const getColor = (label: string) => current.value === label ? config.color.DARK_BLUE : config.color.DARK_GREY
-const mimetic = (label: string) =>
-    current.value === label ? `inset .2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), inset -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
-        : `.2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
-
+const getColor = (label: string) => current.value === label ? primary : config.color.DARK_GREY
+const getBackground = (label: string) => current.value === label ? cc.colorUtils.lighten(primary, 0.58) : 'transparent'
 // 显示drawer
 const drawer = ref(false)
 // 筛选框

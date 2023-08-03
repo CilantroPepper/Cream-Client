@@ -6,7 +6,7 @@
         <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search" class="search-box"/>
         <div
             v-for="(item, index) in tabList" :key="index"
-            :style="`--color: ${getColor(item.label)}; --mimetic: ${mimetic(item.label)};`"
+            :style="`--color: ${getColor(item.label)}; --background: ${getBackground(item.label)}; --hover: ${cc.colorUtils.lighten(primary, 0.6)};`"
             class="item"
             @click="handler.onTabClick(item.path)"
             v-ripple>
@@ -16,10 +16,10 @@
       </div>
       <div class="header" v-ripple>
         <img :src="assets.scnuLogo" class="logo" alt="logo">
-        <div class="title">Design by {{ config.app.AUTHOR }}</div>
+        <div class="title">{{config.app.ABBR}} {{ config.app.VERSION }}</div>
       </div>
     </div>
-    <div class="body">
+    <div class="body" :style="`--bg-dark: ${cc.colorUtils.lighten(primary, 0.58)}; --bg-light: ${cc.colorUtils.lighten(primary, 0.62)}`">
       <slot></slot>
     </div>
   </div>
@@ -27,20 +27,20 @@
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
-import { config } from '../../config'
-import { tabs } from '../../tab'
+import { config } from '@/config.ts'
+import { tabs } from '@/tab.ts'
 import { computed, ref } from 'vue'
-import { cc } from '../../utils/tools'
-import { assets } from '../../utils/assets'
+import { cc } from '@/utils/tools.ts'
+import { assets } from '@/utils/assets.ts'
 import { Search } from '@element-plus/icons-vue'
 
 const route = useRoute()
-const current = computed(() => route.meta.label as string)
-const getColor = (label: string) => current.value === label ? config.color.DARK_BLUE : config.color.DARK_GREY
 
-const mimetic = (label: string) =>
-    current.value === label ?  `inset .2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), inset -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
-        : `.2rem .2rem .4rem var(--GLOBAL-LIGHT-GREY), -.2rem -.2rem .4rem var(--GLOBAL-SMOKE-WHITE)`
+const primary = config.color.DARK_BLUE
+
+const current = computed(() => route.meta.label as string)
+const getColor = (label: string) => current.value === label ? primary : config.color.DARK_GREY
+const getBackground = (label: string) => current.value === label ? cc.colorUtils.lighten(primary, 0.58) : 'transparent'
 
 // 筛选框
 const filter = ref('')
