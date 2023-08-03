@@ -6,8 +6,8 @@
   overflow: hidden;
 
   .menu {
-    width: var(--width);
     flex-shrink: 0;
+    width: var(--width);
     height: 100%;
     overflow-y: auto;
     display: flex;
@@ -19,16 +19,6 @@
     gap: 2.5rem;
     position: relative;
 
-    &::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      width: .2rem;
-      height: calc(100% - 4rem);
-      background: $SMOKE_WHITE;
-      border-radius: 1rem;
-    }
-
     .header {
       display: flex;
       flex-shrink: 0;
@@ -39,7 +29,7 @@
       padding: 1rem 0;
       gap: 1rem;
       cursor: pointer;
-      border-radius: 1rem;
+      border-radius: .5rem;
       transition: all .5s;
       user-select: none;
       background: linear-gradient(30deg, $LIGHTEST_BLUE, $WHITE);
@@ -61,7 +51,7 @@
 
       .title {
         font-size: 1.4rem;
-        text-transform: uppercase;
+        //text-transform: uppercase;
         //font-weight: bold;
       }
     }
@@ -78,7 +68,7 @@
       align-items: center;
       box-sizing: border-box;
       padding: 0 2rem;
-      gap: 2rem;
+      gap: 1rem;
 
       .item {
         flex: 1 0;
@@ -94,12 +84,11 @@
         cursor: pointer;
         transition: all .25s;
         color: var(--color);
-        //background: var(--background);
-        box-shadow: var(--mimetic);
-        border-radius: 1rem;
+        background: var(--background);
+        border-radius: .5rem;
 
         &:hover {
-          background: $SMOKE_WHITE;
+          background: var(--hover);
           color: $BLACK;
         }
 
@@ -123,5 +112,6 @@
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
+    background: linear-gradient(120deg, var(--bg-dark), var(--bg-light));
   }
 }

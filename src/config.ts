@@ -15,7 +15,7 @@ export const config = {
         // PC基准宽度（用于设置响应式单位）, 小于这个宽度的就会被当作WAP端渲染
         STANDARD_WIDTH: 800,
         // WAP端TabBar高度(单位: rem)
-        TABBAR_HEIGHT: 5.5,
+        TABBAR_HEIGHT: 5.4,
         // WAP端是否开启抽屉菜单（若为true，则TabBar表现为抽屉菜单，Tab页有标题栏）
         WAP_MENU: true,
         // PC端Menu宽度(单位: rem)
@@ -23,7 +23,11 @@ export const config = {
         // 描述
         DESCRIPTION: import.meta.env.VITE_APP_DESCRIPTION,
         // 作者
-        AUTHOR: import.meta.env.VITE_APP_AUTHOR
+        AUTHOR: import.meta.env.VITE_APP_AUTHOR,
+        // 版本
+        VERSION: import.meta.env.VITE_APP_VERSION,
+        // 缩写
+        ABBR: import.meta.env.VITE_APP_ABBR
     },
     // 颜色配置
     color: {
