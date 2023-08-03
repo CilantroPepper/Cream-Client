@@ -1,11 +1,10 @@
 <template>
   <div class="pc-root">
     <div class="menu" :style="`--width: ${config.app.MENU_WIDTH}rem;`">
-
       <div class="menu-item">
         <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search" class="search-box"/>
         <div
-            v-for="(item, index) in tabList" :key="index"
+            v-for="(item) in tabList" :key="item.path"
             :style="`--color: ${getColor(item.label)}; --background: ${getBackground(item.label)}; --hover: ${cc.colorUtils.lighten(primary, 0.6)};`"
             class="item"
             @click="handler.onTabClick(item.path)"
@@ -14,13 +13,16 @@
           <span class="label">{{ item.label }}</span>
         </div>
       </div>
+      <div class="flex-col util">
+        <slot name="util"></slot>
+      </div>
       <div class="header" v-ripple>
         <img :src="assets.scnuLogo" class="logo" alt="logo">
         <div class="title">{{config.app.ABBR}} {{ config.app.VERSION }}</div>
       </div>
     </div>
     <div class="body" :style="`--bg-dark: ${cc.colorUtils.lighten(primary, 0.58)}; --bg-light: ${cc.colorUtils.lighten(primary, 0.62)}`">
-      <slot></slot>
+      <slot name="default"></slot>
     </div>
   </div>
 </template>

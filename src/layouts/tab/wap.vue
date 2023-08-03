@@ -12,25 +12,27 @@
             direction="ltr" :with-header="false" size="75%"
             modal-class="wap-menu-modal">
           <div class="menu">
-          <div class="menu-item">
-            <div class="flex-row search-box">
-              <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search"/>
+            <div class="menu-item">
+              <div class="flex-row search-box">
+                <el-input v-model="filter" placeholder="筛选主题" :prefix-icon="Search"/>
+              </div>
+              <div
+                  v-for="(item) in tabList" :key="item.path"
+                  v-ripple
+                  :style="`--color: ${getColor(item.label)}; --background: ${getBackground(item.label)};`"
+                  class="item"
+                  @click="handler.onTabClick(item)">
+                <component :is="item.icon" :color="getColor(item.label)" class="widget"/>
+                <span class="label">{{ item.label }}</span>
+              </div>
             </div>
-            <div
-                v-for="(item) in tabList" :key="item.path"
-                v-ripple
-                :style="`--color: ${getColor(item.label)}; --background: ${getBackground(item.label)};`"
-                class="item"
-                @click="handler.onTabClick(item)">
-              <component :is="item.icon" :color="getColor(item.label)" class="widget"/>
-              <span class="label">{{ item.label }}</span>
+            <div class="flex-col util">
+              <slot name="util"></slot>
             </div>
-
-          </div>
-          <div class="header" v-ripple>
-            <img :src="assets.scnuLogo" class="logo" alt="logo">
-            <div class="title">{{ config.app.ABBR }} {{ config.app.VERSION }}</div>
-          </div>
+            <div class="header" v-ripple>
+              <img :src="assets.scnuLogo" class="logo" alt="logo">
+              <div class="title">{{ config.app.ABBR }} {{ config.app.VERSION }}</div>
+            </div>
           </div>
         </el-drawer>
       </div>
@@ -59,13 +61,13 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue'
-import {useRoute} from 'vue-router'
-import {config} from '../../config'
-import {tabs} from '../../tab'
-import {cc} from '../../utils/tools'
-import {More, Search} from '@element-plus/icons-vue'
-import {assets} from "@/utils/assets.ts";
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { config } from '../../config'
+import { tabs } from '../../tab'
+import { cc } from '../../utils/tools'
+import { More, Search } from '@element-plus/icons-vue'
+import { assets } from "@/utils/assets.ts";
 
 const primary = config.color.DARK_BLUE
 
